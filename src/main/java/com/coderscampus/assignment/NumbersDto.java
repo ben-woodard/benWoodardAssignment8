@@ -1,13 +1,24 @@
 package com.coderscampus.assignment;
 
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class NumbersDto {
 
-	private AtomicInteger number;
+	private Integer number;
 	private AtomicInteger instanceCount;
+	NumbersDto newNumberDto;
 
-	public NumbersDto(AtomicInteger number) {
+	public void createNumbers(Optional<AtomicInteger> number) {
+
+		if (number.isPresent()) {
+			incrementInstanceCount();
+		} else {
+			newNumberDto = new NumbersDto(number);
+		}
+	}
+
+	public NumbersDto(Integer number) {
 		this.number = number;
 		this.instanceCount = new AtomicInteger(1);
 	}
@@ -18,20 +29,22 @@ public class NumbersDto {
 		}
 	}
 
-	public AtomicInteger getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
-	public void setNumber(AtomicInteger number) {
+	public Integer setNumber(Integer number) {
 		this.number = number;
+		return number;
 	}
 
-	public AtomicInteger getInstanceCounter() {
+	public AtomicInteger getInstanceCount() {
 		return instanceCount;
 	}
 
-	public void setInstanceCounter(AtomicInteger instanceCounter) {
-		this.instanceCount = instanceCounter;
+	public AtomicInteger setInstanceCount() {
+		this.instanceCount = 1;
+		return instanceCount;
 	}
 
 }
